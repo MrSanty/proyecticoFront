@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Swal from 'sweetalert2'
+import Alert from './helpers/Alert';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,8 @@ import Swal from 'sweetalert2'
 export class AppComponent {
   title = 'proyecticoFront';
 
-  noFunciona(evt: any) {
-    evt.preventDefault();
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Creo que el desarrolador le dio pereza esta parte',
-      footer: '<a href="">Intentalo en otra ocacion..</a>'
-    })
+  noFunciona( event: any ) {
+    event.preventDefault();
+    Alert.error('Oops...', 'Creo que al desarrolador le dio pereza esta parte');
   }
 }
