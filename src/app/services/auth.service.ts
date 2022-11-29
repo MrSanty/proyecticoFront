@@ -17,8 +17,7 @@ export class AuthService {
     if ( !user ) return false;
     if ( user.username !== username ) return false;
 
-    this.setSession( rememberMe, id, username );
-    return true;
+    return this.setSession( rememberMe, id, username );
   }
 
   logout() {
@@ -28,7 +27,7 @@ export class AuthService {
 
   async searchUser( id: number ) {
     try{
-      const user = await axios.get('https://jsonplaceholder.typicode.com/users/' + id);
+      const user = await axios.get(`https://jsonplaceholder.typicode.com/users/${ id }`);
       return user.data;
     } catch ( error ) {
       return null;
@@ -37,15 +36,15 @@ export class AuthService {
 
   async setSession( rememberMe: boolean, code: number, username: string ) {
     try {
-      console.log({ rememberMe, code, username });
       const { data } = await axios.post('http://localhost:8000/api/auth/', { code, username });
-      if ( rememberMe ) { 
-        localStorage.setItem( 'auth', JSON.stringify( data.token ));
-      } else {
-        sessionStorage.setItem( 'auth', JSON.stringify( data.token ));
-      } 
+      
+      if ( rememberMe ) localStorage.setItem( 'auth', JSON.stringify( data.token ));
+      else sessionStorage.setItem( 'auth', JSON.stringify( data.token ));
+
+      return true;
     } catch ( error ) {
       console.log( error );
+      return false;
     }
   }
 }

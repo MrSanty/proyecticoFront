@@ -22,9 +22,9 @@ export class LoginComponent {
     }
 
     const login = await this.authService.login( this.userId, this.username, this.rememberMe );
-    if ( login ) {
-      this.router.navigate(['/dashboard']); 
-      await Alert.success('Bienvenido', 'Iniciaste sesión correctamente');
+    if ( login ) { 
+      this.router.navigate(['/dashboard']);
+      Alert.success('Bienvenido', 'Iniciaste sesión correctamente');
     }
     else Alert.error('Error', 'Usuario o contraseña incorrectos');
   }
