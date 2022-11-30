@@ -6,7 +6,6 @@ import Alert from '../helpers/Alert';
   providedIn: 'root'
 })
 export class DataService {
-
   constructor() { 
     axios.defaults.baseURL = 'http://localhost:8000/api/';
     let token = localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' );
