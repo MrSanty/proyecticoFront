@@ -5,10 +5,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MyPetsComponent } from './myPets/myPets.component';
 import { PetWithoutHouseComponent } from './petWithoutHouse/petWithoutHouse.component';
 
 const routesDashboard: Routes = [
   { path: 'pets', component: AdoptPetComponent },
+  { path: 'mypets', component: MyPetsComponent },
 ];
 
 const routes: Routes = [

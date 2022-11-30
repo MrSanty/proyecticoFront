@@ -1,3 +1,48 @@
-<p>
-  adoptPet works!
-</p>
+
+<div class="spinner" *ngIf="loading">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<div class="container mt-5" *ngIf="!loading">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-between">
+      <h1 class="text-center">Mascotas sin hogar</h1>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="mystyle">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Opcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pet of data">
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.age }} años</td>
+            <td>{{ pet.type }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="adoptPet(pet.code)"
+              >
+                adoptar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

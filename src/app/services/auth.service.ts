@@ -9,7 +9,7 @@ export class AuthService {
   constructor() { }
 
   static isAuthenticated() {
-    return localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' );
+    return localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' )
   }
 
   async login( id: number, username: string, rememberMe: boolean ) { 
@@ -37,7 +37,6 @@ export class AuthService {
   async setSession( rememberMe: boolean, code: number, username: string ) {
     try {
       const { data } = await axios.post('http://localhost:8000/api/auth/', { code, username });
-      
       if ( rememberMe ) localStorage.setItem( 'auth', JSON.stringify( data.token ));
       else sessionStorage.setItem( 'auth', JSON.stringify( data.token ));
 

@@ -9,7 +9,11 @@ export class DataService {
 
   constructor() { 
     axios.defaults.baseURL = 'http://localhost:8000/api/';
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' );
+    let token = localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' );
+    token = 'Bearer ' + token?.replace(/['"]+/g, '');
+    console.log( token );
+    // @ts-ignore
+    axios.defaults.headers.common['Authorization'] = token;
   }
 
   updateTokenOnClient( token: string ) {
@@ -20,7 +24,6 @@ export class DataService {
   async getAllPetsWithoutOwner() {
     try {
       const { data: { token, pets }} = await axios.get('pet/');
-      this.updateTokenOnClient( token );
       return Object.values( pets );
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );
@@ -28,10 +31,9 @@ export class DataService {
     }
   }
 
-  async createNewPet( code: number, name: string, age: number, type: string ) {
+  async createNewPet( name: string, age: number, type: string ) {
     try {
-      const { data: { token }} = await axios.post('pet/', { code, name, age, type });
-      this.updateTokenOnClient( token );
+      await axios.post('pet/', { name, age, type });
       return true;
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );
@@ -43,7 +45,8 @@ export class DataService {
   async getAllClientPets() {
     try {
       const { data: { token, pets } } = await axios.get('client/');
-      this.updateTokenOnClient( token );
+      console.log( token );
+      this.updateTokenOnClient( JSON.stringify( token ) )
       return Object.values( pets );
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );
@@ -54,7 +57,7 @@ export class DataService {
   async adopteANewPet( code: number ) {
     try {
       const { data: { token } } = await axios.post(`client/${code}`);
-      this.updateTokenOnClient( token );
+      this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );
@@ -65,7 +68,7 @@ export class DataService {
   async updateOwnerPetName( code: number, name: string ) {
     try {
       const { data: { token } } = await axios.put(`client/${code}`, { name });
-      this.updateTokenOnClient( token );
+      this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );
@@ -76,7 +79,7 @@ export class DataService {
   async deleteOwnerPet( code: number ) {
     try {
       const { data: { token } } = await axios.delete(`client/${code}`);
-      this.updateTokenOnClient( token );
+      this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
     } catch ( error: any ) {
       Alert.error('Ups! Algo salió mal', error.response.data.message );

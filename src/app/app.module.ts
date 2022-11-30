@@ -10,15 +10,17 @@ import { DataService } from './services/data.service';
 import { HomeComponent } from './home/home.component';
 import { AdoptPetComponent } from './adoptPet/adoptPet.component';
 import { PetWithoutHouseComponent } from './petWithoutHouse/petWithoutHouse.component';
+import { MyPetsComponent } from './myPets/myPets.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
     LoginComponent,
       DashboardComponent,
       HomeComponent,
       AdoptPetComponent,
-      PetWithoutHouseComponent
+      PetWithoutHouseComponent,
+      MyPetsComponent
    ],
   imports: [
     BrowserModule,
