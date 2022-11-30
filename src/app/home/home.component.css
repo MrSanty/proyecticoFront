@@ -1,0 +1,12 @@
+.img {
+  background-image: url('https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-perro_23-2149100178.jpg?w=1060&t=st=1669827256~exp=1669827856~hmac=1a50434a933f8aa77706201488650cf742a3c69dba2ddd91200e21bae119d654');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh !important;
+} 
+
+.mask {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+}

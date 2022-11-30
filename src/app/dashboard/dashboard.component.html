@@ -1,7 +1,12 @@
+<nav class="navbar ps-3 pe-3 pb-3 shadow container mt-3 radius-5">
+  <div class="container">
+    <img src="../../assets/img/Mi proyecto.png" alt="Escudo de San Jorge" width="50" height="50" class="d-inline-block align-text-top myimg">
+    
+    <!-- redirec to login/profesor -->
+    <button class="btn btn-danger opacity-75" (click)="logout()">logout</button>
+  </div>
+</nav>
 
-
-
-
-<p>
-  dashboard works!
-</p>
+<div>
+  <router-outlet></router-outlet>
+</div>

@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DataService } from './services/data.service';
+import { HomeComponent } from './home/home.component';
+import { AdoptPetComponent } from './adoptPet/adoptPet.component';
+import { PetWithoutHouseComponent } from './petWithoutHouse/petWithoutHouse.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [					
     AppComponent,
     LoginComponent,
-      DashboardComponent
+      DashboardComponent,
+      HomeComponent,
+      AdoptPetComponent,
+      PetWithoutHouseComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
