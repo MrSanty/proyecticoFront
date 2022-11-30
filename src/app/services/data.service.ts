@@ -8,11 +8,6 @@ import Alert from '../helpers/Alert';
 export class DataService {
   constructor() { 
     axios.defaults.baseURL = 'http://localhost:8000/api/';
-    let token = localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' );
-    token = 'Bearer ' + token?.replace(/['"]+/g, '');
-    console.log( token );
-    // @ts-ignore
-    axios.defaults.headers.common['Authorization'] = token;
   }
 
   updateTokenOnClient( token: string ) {
@@ -43,8 +38,9 @@ export class DataService {
   /* Client */
   async getAllClientPets() {
     try {
+      const t = (localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' ))?.replace(/['"]+/g, '');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
       const { data: { token, pets } } = await axios.get('client/');
-      console.log( token );
       this.updateTokenOnClient( JSON.stringify( token ) )
       return Object.values( pets );
     } catch ( error: any ) {
@@ -55,6 +51,8 @@ export class DataService {
 
   async adopteANewPet( code: number ) {
     try {
+      const t = (localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' ))?.replace(/['"]+/g, '');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
       const { data: { token } } = await axios.post(`client/${code}`);
       this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
@@ -66,6 +64,8 @@ export class DataService {
 
   async updateOwnerPetName( code: number, name: string ) {
     try {
+      const t = (localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' ))?.replace(/['"]+/g, '');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
       const { data: { token } } = await axios.put(`client/${code}`, { name });
       this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
@@ -77,6 +77,8 @@ export class DataService {
 
   async deleteOwnerPet( code: number ) {
     try {
+      const t = (localStorage.getItem( 'auth' ) || sessionStorage.getItem( 'auth' ))?.replace(/['"]+/g, '');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${t}`;
       const { data: { token } } = await axios.delete(`client/${code}`);
       this.updateTokenOnClient( JSON.stringify( token ) )
       return true;
